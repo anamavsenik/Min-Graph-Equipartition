@@ -27,6 +27,9 @@ def pomozna(G,X,Y):
 
 def pozresna_metoda(G): #G je matrika sosednosti
     n = len(G)
+    for a in range(0,n):
+        if G[a][a] ==1:
+            G[a][a]=0
     d1=int(n/2)
     koncaj=False
     X=list(range(0,d1))
