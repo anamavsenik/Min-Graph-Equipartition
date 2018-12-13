@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5b8028e-b892-46a6-8aa3-5ea9af71c118" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/proba.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/simulirano ohlajanje.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proba.py" beforeDir="false" afterPath="$PROJECT_DIR$/proba.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,16 +18,16 @@
         <entry file="file://$PROJECT_DIR$/pozresna_metoda.py">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="1" selection-start-column="1" selection-end-column="1" />
+              <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/proba.py">
+        <entry file="file://$PROJECT_DIR$/simulirano ohlajanje.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="24" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="646">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
             </state>
           </provider>
         </entry>
@@ -48,13 +49,14 @@
       <list>
         <option value="$PROJECT_DIR$/pozresna_metoda.py" />
         <option value="$PROJECT_DIR$/proba.py" />
+        <option value="$PROJECT_DIR$/simulirano ohlajanje.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="100" />
+    <option name="x" value="765" />
     <option name="y" value="20" />
-    <option name="width" value="1400" />
+    <option name="width" value="839" />
     <option name="height" value="820" />
   </component>
   <component name="ProjectView">
@@ -135,15 +137,16 @@
       <updated>1544642983687</updated>
       <workItem from="1544642988415" duration="246000" />
       <workItem from="1544708410045" duration="540000" />
-      <workItem from="1544731408911" duration="1128000" />
+      <workItem from="1544731408911" duration="4583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1914000" />
+    <option name="totallyTimeSpent" value="5369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25642672" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -172,17 +175,24 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pozresna_metoda.py">
+    <entry file="file://$PROJECT_DIR$/proba.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proba.py">
+    <entry file="file://$PROJECT_DIR$/pozresna_metoda.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="24" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="24" />
+        <state>
+          <caret line="3" column="19" lean-forward="true" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulirano ohlajanje.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
         </state>
       </provider>
     </entry>

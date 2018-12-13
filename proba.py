@@ -1,5 +1,5 @@
 # libraries
-import matplotlib.pyplot as plt
+import as plt
 import networkx as nx
 import pandas as pd
 
