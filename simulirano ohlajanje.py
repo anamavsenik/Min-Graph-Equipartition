@@ -19,9 +19,9 @@ def simulirano_ohlajanja(G,t):
                 R=[A,B]
                 if kvaliteta(R,A,B) < kvaliteta(S,X,Y) or una vrjetnost pač
                     S=R
-                    #zmanjšamo t
-                if kvaliteta()<kvaliteta(najboljsi)
-                    najbolsi=#nekej pač
+                zmanjšamo t
+                if kvaliteta(trenutna)<kvaliteta(najboljsi)
+                    najbolsi=trenutna
     return najbolsi
 
         #izracunamo kvaliteto X in Y- torej število povezav med X in Y
