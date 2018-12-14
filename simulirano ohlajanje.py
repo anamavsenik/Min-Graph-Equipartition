@@ -1,13 +1,13 @@
 def simulirano_ohlajanja(G,t):
     n = len(G)
-    for a in range(0, n):
+    for a in range(0, n): #spremenimo diagonalo da ima same 0
         if G[a][a] == 1:
             G[a][a] = 0
     d1 = int(n / 2)
-    X = list(range(0, d1))
+    X = list(range(0, d1)) #vektorja indeksov vozlišč
     Y = list(range(d1, n))
     trenutna=[X, Y]
-    najbolsi=trenutna
+    najboljsi = trenutna
     while #nekej
         for i in X:
             for j in Y:
@@ -21,8 +21,8 @@ def simulirano_ohlajanja(G,t):
                     S=R
                 zmanjšamo t
                 if kvaliteta(trenutna)<kvaliteta(najboljsi)
-                    najbolsi=trenutna
-    return najbolsi
+                    najboljsi = trenutna
+    return najboljsi
 
         #izracunamo kvaliteto X in Y- torej število povezav med X in Y
 
