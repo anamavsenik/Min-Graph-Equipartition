@@ -1,3 +1,6 @@
+import random
+import math
+
 def simulirano_ohlajanja(G,t):
     n = len(G)
     for a in range(0, n): #spremenimo diagonalo da ima same 0
@@ -6,6 +9,8 @@ def simulirano_ohlajanja(G,t):
     d1 = int(n / 2)
     X = list(range(0, d1)) #vektorja indeksov vozlišč
     Y = list(range(d1, n))
+    A= list(range(0, d1))
+    B= list(range(d1, n))
     trenutna=[X, Y]
     najboljsi = trenutna
     while #nekej
@@ -13,14 +18,13 @@ def simulirano_ohlajanja(G,t):
             for j in Y:
                 x = X.index(i)
                 y = Y.index(j)
-                #kle morm dodat nova vektorja A in B tko da se X in Y ne spremenita
                 A[x] = j
                 B[y] = i
                 R=[A,B]
-                if kvaliteta(R,A,B) < kvaliteta(S,X,Y) or una vrjetnost pač
+                if kvaliteta(R,A,B) < kvaliteta(S,X,Y) or random.uniform(0, 1)<math.exp((kvaliteta(R,A,B)-kvaliteta(S,X,Y))/t):
                     S=R
-                zmanjšamo t
-                if kvaliteta(trenutna)<kvaliteta(najboljsi)
+                zmanjšamo t #kle ne vem za kok
+                if kvaliteta(trenutna)<kvaliteta(najboljsi):
                     najboljsi = trenutna
     return najboljsi
 
