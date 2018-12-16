@@ -1,1 +1,1 @@
-python --version
+import networkx as nx
