@@ -5,6 +5,7 @@
 \usepackage{url}
 \usepackage[dvipsnames,usenames]{color}
 \usepackage{graphicx}
+\usepackage{biblatex}
 
 \graphicspath{ {./images/} }
 \textwidth 15cm
@@ -43,7 +44,7 @@
 
 
 \newcommand{\imeavtorja}{Ana Marija Kravanja}
-\newcommand{\naslovdela}{Min-Graph Equipartition Problem with Simulated Annealing}
+\newcommand{\naslovdela}{Min-Graph Equipartition Problem with Simulated Annealing \\  (Problem delitve grafa z metodo simuliranega ohlajanja)}
 \newcommand{\letnica}{2019} 
 
 \begin{document}
@@ -67,10 +68,10 @@ Ljubljana, \letnica}
 \pagebreak
 
 
-\section{Osnovno o projektu}
+\section{\textbf{OSNOVNO O PROJEKTU}}
 V naši projektni nalogi bomo reševali problem deljenja grafa. Naš cilj je graf razdeliti na dva skoraj enaka dela tako, da je med tema nastalima deloma čim manj povezav. Najti tako delitev je težek problem, ki postane še težji, če moramo preveriti zelo veliko rešitev, da najdemo optimalno. Reševali ga bomo s požrešno metodo (Greedy Method) in metodo simuliranega ohlajanja (Simulated Annealing Heuristic) ter nato rešitve metod primerjali med sabo in jih preizkusili na različnih grafih (gosti, redki, naključni) pri različnih parametrih (temperatura, sosednja vozlišča). 
 
-\section{Požrešna metoda}
+\section{\textbf{POŽREŠNA METODA}}
 Požrešna metoda je strategija, ki na vsakem posameznem koraku izbere optimalno rešitev s ciljem, da nas to privede do globalno optimalne rešitve. To pomeni, da algoritem izbere rešitev, ki je trenutno najboljša, vendar se pri tem ne ozira na posledice - ne gleda celotne slike. Težava te metode je, da na vsakem koraku izbere le lokalno najboljšo rešitev, samo upamo pa lahko, da je to tudi prava pot do globalnega optimuma. Pogosto torej sploh ne najde najboljše rešitve, povsem mogoče je celo, da nas pripelje do najslabše možne. \\
 
 Naj bo $G=(V,E)$ enostaven graf, pri čemer je $V$ množica vozlišč in $E$ množica povezav. Naj bo število vozlišč enako $n$. Definirajmo delitev grafa na dve množici X in Y, pri čemer je $|X| = \lceil \frac{n}{2} \rceil$. Iskali bomo minimalno širino bisekcije, to je najmanjše število povezav med $X$ in $Y$ med vsemi možnimi delitvami. 
@@ -98,7 +99,7 @@ Vhodni podatki: Graf $G=(V,E), |V|=n$.
 \end{enumerate}
 Izhodni podatki: delitev $(X,Y)$.
 
-\section{Metoda simuliranega ohlajanja}
+\section{\textbf{METODA SIMULIRANEGA OHLAJANJA}}
 Algoritem se je v osnovi razvil zaradi procesa toplotne obdelave kovin. Različne materiale segrevamo oz. ohlajamo, da bi spremenili fizikalne lastnosti njihove notranje strukture. Ko se kovina enkrat ohladi, postane njena nova struktura fiksna in kovina tako obdrži pridobljene lastnosti. Pri simuliranem ohlajanju je temperatura naša spremenljivka, ki ponazarja toplotni proces. Na začetku temperaturo nastavimo na visoko vrednost in jo nato sčasoma nižamo, ko se algoritem izvaja. Na začetku, ko je temperatura nastavljena na visoko vrednost, algoritem pogosteje sprejema rešitve, ki so slabše od naše trenutne rešitve zato, da se izogne lokalnim optimumom, ki nas ne bodo pripeljali do globalnega optimuma. Z nižanjem temperature pa se niža tudi verjetnost, da bo algoritem izbiral slabše rešitve; postopoma se torej osredotoči na iskalno območje, na katerem upamo, da je mogoče najti rešitev blizu optimalne. Algoritem je zelo učinkovit pri iskanju rešitev, ki so blizu optimalne, za probleme velikih velikosti, ki vsebujejo številne lokalne optimume.
 
 \subsection{Algoritem metode simuliranega ohlajanja}
@@ -121,9 +122,9 @@ Za funkcijo $Q$ smo si v našem primeru izbrali $S(x,y)$, ki je definiran enako 
 \end{enumerate}
 
 
-\section{Primeri}
+\section{\textbf{PRIMERI}}
 Poglejmo si nekaj primerov delitve grafov. 
-
+\pagebreak
 \begin{figure}[h]
     \centering
     \includegraphics{prvi_graf} 
@@ -144,6 +145,33 @@ Poglejmo si nekaj primerov delitve grafov.
     \caption{Johnsonsov geometrični graf}
     \label{fig:3_graf}
 \end{figure}
+
+\newpage
+
+\begin{thebibliography}{9}
+\bibitem{integer} 
+L. A. Wolsey, Integer Programming, Wiley Interscience,1998. 
+
+ 
+\bibitem{comparison} 
+C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual Compariosn. [online]
+ 
+\bibitem{metaheuristika} 
+S. Luke, Essentials of Metaheuristics: a set of undergraduate lscture notes, online. 
+
+\bibitem{metaheuristika 2}
+S. Clinton, Generic algorithms with Python.
+
+\bibitem{metaheuristika2}
+K.L. Du, M.N.S. Swamy, Search and optimization by metaheuristics: tehniques and algorithms inspired by nature. 
+
+
+\bibitem{implementacija}
+El. G. Talbi, Metaheuristics: from design to implementation.
+
+\end{thebibliography}
+
+
 
 
 \end{document}
