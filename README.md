@@ -16,7 +16,7 @@ study, an interested reader can read more in [4,5,6].
 [1] L. A. Wolsey, Integer Programming, Wiley Interscience. \
 [2] C. Blum, A. Roli, Metaheuristics in Combinatorial Optimization: Overview and Conceptual
 Comparison, online.\
-[3] S. Luke, Essentials of Metaheuristics: a set of undergraduate lecture notes, online.
+[3] S. Luke, Essentials of Metaheuristics: a set of undergraduate lecture notes, online.\
 [4] S. Clinton, Genetic algorithms with Python.\
 [5] K.-L. Du, M. N. S. Swamy, Search and optimization by metaheuristics: techniques and algorithms
 inspired by nature.\
