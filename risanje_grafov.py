@@ -1,36 +1,19 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-G = nx.cycle_graph(10)
+A=numpy.matrix([[0,0,1,0,1,0,0],[0,0,1,1,0,0,0],[1,1,0,0,0,1,0],[0,1,0,0,1,0,1],[1,0,0,1,0,1,1],[0,0,1,0,1,0,1],[0,0,0,1,1,1,0]])
+G=nx.from_numpy_matrix(A)
 nx.draw_networkx(G)
 plt.show()
 
-import networkx as nx
-import matplotlib.pyplot as plt
+#predloga barvanja grafov na dve barvi:
+G = nx.erdos_renyi_graph(20,0.1)
+color_map = []
+for node in G:
+    if node <10:
+        color_map.append('blue')
+    else:
+        color_map.append('green')
+nx.draw(G,node_color = color_map,with_labels = True)
+plt.show()
 
-def draw_graph(graph):
-
-    # extract nodes from graph
-    nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
-
-    # create networkx graph
-    G=nx.Graph()
-
-    # add nodes
-    for node in nodes:
-        G.add_node(node)
-
-    # add edges
-    for edge in graph:
-        G.add_edge(edge[0], edge[1])
-
-    # draw graph
-    pos = nx.shell_layout(G)
-    nx.draw(G, pos)
-
-    # show graph
-    plt.show()
-
-# draw example
-graph = [(20, 21),(21, 22),(22, 23), (23, 24),(24, 25), (25, 20)]
-draw_graph(graph)
