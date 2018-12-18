@@ -79,8 +79,8 @@ Naj bo $G=(V,E)$ enostaven graf, pri čemer je $V$ množica vozlišč in $E$ mno
 \begin{definicija}
 Naj bo $G=(V,E)$ enostaven graf in $X,Y \subseteq V$, tako da je $X \cap Y = \emptyset$ in $X \cup Y =V$.
 \begin{itemize}
-\item Za $x \in X$ označimo z $I(x)$ notranjo vrednost, to je šteilo povezav $(x,z) \in E;z\in X \backslash \{x\}$ . Analogno definiramo $I(y)$ za $y \in Y$.
-\item Za $x \in X$ označimo z $O(x)$ zunanjo vrednost, to je šteilo povezav $(x,z) \in E;z\in Y $ . Analogno definiramo $O(y)$ za $y \in Y$.
+\item Za $x \in X$ označimo z $I(x)$ notranjo vrednost, to je število povezav $(x,z) \in E;z\in X \backslash \{x\}$ . Analogno definiramo $I(y)$ za $y \in Y$.
+\item Za $x \in X$ označimo z $O(x)$ zunanjo vrednost, to je število povezav $(x,z) \in E;z\in Y $ . Analogno definiramo $O(y)$ za $y \in Y$.
 \item Za $x \in X, y \in Y$ naj bo $\omega(x,y) := \begin{cases} 1,&\text{if} (x,y) \in E\\ 
 0, &\text{sicer}\end{cases} $.
 \item Za $x \in X, y \in Y$ naj bo $S(x,y):= O(x)-I(x)+O(y)-I(y)-2\omega(x,y)$.
