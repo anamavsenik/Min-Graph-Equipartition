@@ -11,9 +11,8 @@ def simulirano_ohlajanja(G,t):
     Y = list(range(d1, n))
     A= list(range(0, d1))
     B= list(range(d1, n))
-    trenutna=[X, Y]
     k=0
-    najboljsi = trenutna
+    najboljsi = [X,Y]
     while k<3000:
         t= (500/log(k))
         for i in X:
@@ -23,10 +22,8 @@ def simulirano_ohlajanja(G,t):
                 A[x] = j
                 B[y] = i
                 R=[A,B]
-                if kvaliteta(R,A,B) < kvaliteta(S,X,Y) or random.uniform(0, 1)<math.exp((kvaliteta(R,A,B)-kvaliteta(S,X,Y))/t):
-                    S=R
-                if kvaliteta(trenutna)<kvaliteta(najboljsi):
-                    najboljsi = trenutna
+                if kvaliteta(R,A,B) > kvaliteta(najbolsi,najbolsi[1], najbolsi[2]) or random.uniform(0, 1)<math.exp((kvaliteta(R,A,B)-kvaliteta(najbolsi,najbolsi[1], najbolsi[2]))/t):
+                    najbolsi = R
             k+=1
     return najboljsi
 
