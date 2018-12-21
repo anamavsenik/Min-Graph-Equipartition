@@ -14,8 +14,6 @@ def simulirano_ohlajanja(G,t):
     trenutna=[X, Y]
     k=2
     najboljsi = trenutna
-    k=0
-    najboljsi = [X,Y]
     while k<3000:
         for i in X:
             for j in Y:
