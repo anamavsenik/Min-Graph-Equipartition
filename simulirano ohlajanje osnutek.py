@@ -11,18 +11,16 @@ def simulirano_ohlajanja(G,t):
     Y = list(range(d1, n))
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
-    k=0
+    k=2
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y)
     while k < 3000:
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav)
-        t= (500/log(k))
+        t= (500/math.log(k))
         a = random.randint(0,d1) #izbere naključno vozlišče v X 
         b = random.randint(d1,n) #izbere naključno vozlišče v Y
-        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][1]  #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
-        trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][2]
-        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[b][1]
-        trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[b][2]
-        if trenutno_stevilo_povezav > najboljse_stevilo_povezav or random.uniform(0, 1)<math.exp((trenutno_stevilo_povezav-najboljse_stevilo_povezav)/t):
+        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
+        trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][2] + trenutni_seznam_stevila_sosedov[b][2]
+        if trenutno_stevilo_povezav < najboljse_stevilo_povezav or random.uniform(0, 1)<math.exp((trenutno_stevilo_povezav-najboljse_stevilo_povezav)/t):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             A[a] = vmesni
             A[a] = B[b]
@@ -67,6 +65,3 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
             seznam_stevila_sosedov[nahajanje2+len(C)] = (Iy, Oy)
         stevilo_povezav += Ox
     return seznam_stevila_sosedov, stevilo_povezav
-
-
-A = [[]]
