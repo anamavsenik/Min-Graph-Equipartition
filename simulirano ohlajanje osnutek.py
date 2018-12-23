@@ -43,7 +43,8 @@ def simulirano_ohlajanja(G,t):
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
     n = len(G)
-    seznam_stevila_sosedov =[(0,0)]*n #prva stevilka pove stevilo s kolikimi je povezan v svoji mnozici, druga s kolikimi je izven torej v Y
+    seznam_stevila_sosedov = [(0,0)]*n #prva stevilka pove stevilo s kolikimi je povezan v svoji mnozici, druga s kolikimi je izven torej v Y
+    stevilo_povezav = 0
     for i in C:
         for j in D:
             Ix = 0
@@ -60,9 +61,11 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
                     Iy += 1
                 if G[i][l] == 1:
                     Ox += 1
-            seznam_stevila_sosedov[C.index(i)] = (Ix, Ox)
-            seznam_stevila_sosedov[D.index[j]+len(C)] = (Iy,Oy)
-            stevilo_povezav = Ox  + Oy - G[i][j]
+            nahajanje = C.index(i)
+            nahajanje2 = D.index(j)
+            seznam_stevila_sosedov[nahajanje] = (Ix, Ox)
+            seznam_stevila_sosedov[nahajanje2+len(C)] = (Iy, Oy)
+        stevilo_povezav += Ox
     return seznam_stevila_sosedov, stevilo_povezav
 
 
