@@ -103,21 +103,21 @@ Izhodni podatki: delitev $(X,Y)$.
 Algoritem se je v osnovi razvil zaradi procesa toplotne obdelave kovin. Različne materiale segrevamo oz. ohlajamo, da bi spremenili fizikalne lastnosti njihove notranje strukture. Ko se kovina enkrat ohladi, postane njena nova struktura fiksna in kovina tako obdrži pridobljene lastnosti. Pri simuliranem ohlajanju je temperatura naša spremenljivka, ki ponazarja toplotni proces. Na začetku temperaturo nastavimo na visoko vrednost in jo nato sčasoma nižamo, ko se algoritem izvaja. Na začetku, ko je temperatura nastavljena na visoko vrednost, algoritem pogosteje sprejema rešitve, ki so slabše od naše trenutne rešitve zato, da se izogne lokalnim optimumom, ki nas ne bodo pripeljali do globalnega optimuma. Z nižanjem temperature pa se niža tudi verjetnost, da bo algoritem izbiral slabše rešitve; postopoma se torej osredotoči na iskalno območje, na katerem upamo, da je mogoče najti rešitev blizu optimalne. Algoritem je zelo učinkovit pri iskanju rešitev, ki so blizu optimalne, za probleme velikih velikosti, ki vsebujejo številne lokalne optimume.
 
 \subsection{Algoritem metode simuliranega ohlajanja}
-Graf si definiramo analogno kot pri požrešni metodi. Za $S(x,y)>0$ zamenjamo vozlišči, če pa je $S(x,y)<0$, vozlišči zamenjamo z verjetnostjo $$P(x,y,t) = e^{\frac{S(x,y)}{t}}; t\ge 0$$
+Graf si definiramo analogno kot pri požrešni metodi. Vozlišči zamenjamo z verjetnostjo $$P(x,y,t) = e^{\frac{S(x,y)}{t}}; t\ge 0$$.
 
 \subsubsection{Algoritem 2}
-S $Q(Z)$ je označena funkcija, ki množici Z priredi neko kvaliteto, torej če je $Q(Z) >Q(R)$, pomeni, da je množica Z bolj ugodna za nadaljnjo obravnavo.
-Za funkcijo $Q$ smo si v našem primeru izbrali $S(x,y)$, ki je definiran enako kot pri požrešni metodi. Torej če je $S(x,y)$ funkcija, kjer smo v množici $R$ zamenjali x in y in $S(a,b)$ množica $Z$, kjer ju nismo zamenjali in velja, da je $S(x,y) > S(a,b)$, potem z določeno verjetnostjo zamenjamo $R$ z $Z$. 
+S $Q(S)$ je označena funkcija, ki množici S priredi neko kvaliteto, torej če je $Q(S) >Q(R)$, pomeni, da je množica Z bolj ugodna za nadaljnjo obravnavo.
+Za funkcijo $Q$ smo si v našem primeru izbrali število povezav med množicama. Torej če je $Q(R)$ funkcija, kjer smo v množici $R$ zamenjali x in y in $Q(S)$ množica $S$, kjer ju nismo zamenjali in velja, da je $Q(R)<Q(S)$, potem z določeno verjetnostjo zamenjamo $R$ z $S$. V množici R je v tem primeru med podmnožicama namreč manj povezav kot v S.
 \begin{enumerate}
 \item t= temperatura z visoko vrednostjo
-\item Z= začetna delitev grafa na množici X in Y 
-\item N= Z  naj predstavlja trenutno najboljšo rešitev
+\item S= začetna delitev grafa na množici X in Y 
+\item N= S  naj predstavlja trenutno najboljšo rešitev
 \item ponovi, dokler je N najboljša rešitev, nam je zmanjkalo časa ali pa je $t \leq 0$
 \item 			R=delitev, kjer zamenjamo $x$ in $y$
-\item 			če je $Q(R)>Q(Z)$ ali naključno število med 0 in 1 manjše od $P(x,y,t)$, potem je $S=R$
+\item 			če je $Q(R)<Q(S)$ ali naključno število med 0 in 1 manjše od $P(x,y,t)$, potem je $S=R$
 \item 			zmanjšamo t
-\item 			če je $Q(Z)>Q(N)$ 
-\item 				$N=Z$
+\item 			če je $Q(S)>Q(N)$ 
+\item 				$N=S$
 \item vrni $N$		
 \end{enumerate}
 
