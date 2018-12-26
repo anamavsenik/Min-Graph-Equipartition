@@ -38,6 +38,13 @@ def simulirano_ohlajanja(G,t):
                 if G[j][a] ==1:
                     trenutni_seznam_stevila_sosedov[j][0] += 1
                     trenutni_seznam_stevila_sosedov[j][1] -= 1
+            #zamenja se se pri vozliščih ki sta se zamnjali notranje povezave postanejo zunanje in obratno
+            obrat = trenutni_seznam_stevila_sosedov[a][0]
+            trenutni_seznam_stevila_sosedov[a][0]=trenutni_seznam_stevila_sosedov[a][1]
+            trenutni_seznam_stevila_sosedov[a][1]=obrat
+            obrat = trenutni_seznam_stevila_sosedov[b][0]
+            trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
+            trenutni_seznam_stevila_sosedov[b][1] = obrat
             najboljsi_seznam_stevila_sosedov = trenutni_seznam_stevila_sosedov
             mesto = A.index(a) #klele ju zamenjamo v vektorju A in B
             mesto2 = B.index(b)
