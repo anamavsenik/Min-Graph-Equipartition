@@ -13,7 +13,7 @@ def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
     B = list(range(d1, n))
     k=2
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
-    while  (k < 3000):
+    while (t>0) or (k>5000):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
         a = random.choice(A) #izbere naključno vozlišče v X
         b = random.choice(B) #izbere naključno vozlišče v Y
@@ -21,7 +21,7 @@ def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b]==1:
             trenutno_stevilo_povezav += 2
-        if trenutno_stevilo_povezav < najboljse_stevilo_povezav or random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/(temp)):
+        if trenutno_stevilo_povezav < najboljse_stevilo_povezav or random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/(t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
             for i in A:
@@ -52,6 +52,7 @@ def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
+        t -=1
     return A,B
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
