@@ -42,9 +42,9 @@ def simulirano_ohlajanja(G,t):
             obrat = trenutni_seznam_stevila_sosedov[a][0]
             trenutni_seznam_stevila_sosedov[a][0]=trenutni_seznam_stevila_sosedov[a][1]
             trenutni_seznam_stevila_sosedov[a][1]=obrat
-            obrat = trenutni_seznam_stevila_sosedov[b][0]
+            obrat2 = trenutni_seznam_stevila_sosedov[b][0]
             trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
-            trenutni_seznam_stevila_sosedov[b][1] = obrat
+            trenutni_seznam_stevila_sosedov[b][1] = obrat2
             najboljsi_seznam_stevila_sosedov = trenutni_seznam_stevila_sosedov
             mesto = A.index(a) #klele ju zamenjamo v vektorju A in B
             mesto2 = B.index(b)
