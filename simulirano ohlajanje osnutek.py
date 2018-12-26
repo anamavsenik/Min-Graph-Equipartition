@@ -15,7 +15,6 @@ def simulirano_ohlajanja(G,t):
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y)
     while k < 3000:
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav)
-        t= (500/math.log(k))
         a = random.choice(A) #izbere naključno vozlišče v X
         b = random.choice(B) #izbere naključno vozlišče v Y
         trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
