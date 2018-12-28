@@ -18,6 +18,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
         mesto = random.randrange(len(A))
         a = A[mesto]
         mesto2 = random.randrange(len(B))
+        b=B[mesto2]
         trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
@@ -52,7 +53,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
             B[mesto2] = vmesni
         k += 1
         t -=1
-    return A,B
+    return A,B,trenutno_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
     n = len(G)
