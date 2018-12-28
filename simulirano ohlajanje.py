@@ -1,7 +1,7 @@
 import random
 import math
 
-def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
+def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     n = len(G)
     for a in range(0, n): #spremenimo diagonalo da ima same 0
         if G[a][a] == 1:
@@ -13,10 +13,11 @@ def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
     B = list(range(d1, n))
     k=2
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
-    while (t>0) or (k>5000) :
+    while (t>0) or (k>5000) or (trenutno_stevilo_povezav == 0):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
-        a = random.choice(A) #izbere naključno vozlišče v X
-        b = random.choice(B) #izbere naključno vozlišče v Y
+        mesto = random.randrange(len(A))
+        a = A[mesto]
+        mesto2 = random.randrange(len(B))
         trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
@@ -46,9 +47,7 @@ def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
             trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
             trenutni_seznam_stevila_sosedov[b][1] = obrat2
             najboljsi_seznam_stevila_sosedov = trenutni_seznam_stevila_sosedov
-            mesto = A.index(a) #klele ju zamenjamo v vektorju A in B
-            mesto2 = B.index(b)
-            vmesni= A[mesto]
+            vmesni= A[mesto] #klele ju zamenjamo v vektorju A in B
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
@@ -59,7 +58,7 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
     n = len(G)
     seznam_stevila_sosedov = [[0, 0]] * n #prva stevilka pove stevilo s kolikimi je povezan v svoji mnozici, druga s kolikimi je izven torej v Y
     stevilo_povezav = 0
-    for i in C:
+    for nahajanje, i in enumerate(C, 0):
         Ix = 0
         Ox = 0
         for k in C:
@@ -68,10 +67,9 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
         for j in D:
             if G[j][k] == 1:
                 Ox += 1
-        nahajanje = C.index(i)
         seznam_stevila_sosedov[nahajanje] = [Ix, Ox]
         stevilo_povezav += Ox
-    for j in D:
+    for nahajanje2, j in enumerate(D,0):
         Iy = 0
         Oy = 0
         for l in C:
@@ -80,6 +78,5 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
         for k in D:
             if G[j][k] == 1:
                 Iy += 1
-        nahajanje2 = D.index(j)
         seznam_stevila_sosedov[nahajanje2 + len(C)] = [Iy, Oy]
     return seznam_stevila_sosedov, stevilo_povezav
