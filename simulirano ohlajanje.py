@@ -1,7 +1,7 @@
 import random
 import math
 
-def simulirano_ohlajanja(G,t):
+def simulirano_ohlajanja(G,t): #temperaturo ponavadi izberemo visoko
     n = len(G)
     for a in range(0, n): #spremenimo diagonalo da ima same 0
         if G[a][a] == 1:
@@ -9,38 +9,77 @@ def simulirano_ohlajanja(G,t):
     d1 = int(n / 2)
     X = list(range(0, d1)) #vektorja indeksov vozlišč
     Y = list(range(d1, n))
-    A= list(range(0, d1))
-    B= list(range(d1, n))
-    trenutna=[X, Y]
+    A = list(range(0, d1)) #vektorja indeksov vozlišč
+    B = list(range(d1, n))
     k=2
-    najboljsi = trenutna
-    while k<3000:
-        for i in X:
-            for j in Y:
-                x = X.index(i)
-                y = Y.index(j)
-                A[x] = j
-                B[y] = i
-                R=[A,B]
-                if kvaliteta(R,A,B) < kvaliteta(trenutna,X,Y) or random.uniform(0, 1)<math.exp((kvaliteta(R,A,B)-kvaliteta(trenutna,X,Y))/t):
-                    trenutna=R
-                t = (500 / log(k))
-                if kvaliteta(trenutna)<kvaliteta(najboljsi):
-                    najboljsi = trenutna
-                if kvaliteta(R,A,B) > kvaliteta(najbolsi,najbolsi[1], najbolsi[2]) or random.uniform(0, 1)<math.exp((kvaliteta(R,A,B)-kvaliteta(najbolsi,najbolsi[1], najbolsi[2]))/t):
-                    najbolsi = R
-            k+=1
-    return najboljsi
+    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
+    while (t>0) or (k>5000) :
+        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
+        a = random.choice(A) #izbere naključno vozlišče v X
+        b = random.choice(B) #izbere naključno vozlišče v Y
+        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
+        trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
+        if G[a][b] == 1:
+            trenutno_stevilo_povezav += 2
+        if trenutno_stevilo_povezav < najboljse_stevilo_povezav or random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/(t)):
+            najboljse_stevilo_povezav = trenutno_stevilo_povezav
+            # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
+            for i in A:
+                if G[i][a] == 1:
+                    trenutni_seznam_stevila_sosedov[i][0] -= 1
+                    trenutni_seznam_stevila_sosedov[i][1] += 1
+                if G[i][b] ==1:
+                    trenutni_seznam_stevila_sosedov[i][0] += 1
+                    trenutni_seznam_stevila_sosedov[i][1] -= 1
+            for j in B:
+                if G[j][b] == 1:
+                    trenutni_seznam_stevila_sosedov[j][0] -= 1
+                    trenutni_seznam_stevila_sosedov[j][1] += 1
+                if G[j][a] ==1:
+                    trenutni_seznam_stevila_sosedov[j][0] += 1
+                    trenutni_seznam_stevila_sosedov[j][1] -= 1
+            #zamenja se se pri vozliščih ki sta se zamnjali notranje povezave postanejo zunanje in obratno
+            obrat = trenutni_seznam_stevila_sosedov[a][0]
+            trenutni_seznam_stevila_sosedov[a][0]=trenutni_seznam_stevila_sosedov[a][1]
+            trenutni_seznam_stevila_sosedov[a][1]=obrat
+            obrat2 = trenutni_seznam_stevila_sosedov[b][0]
+            trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
+            trenutni_seznam_stevila_sosedov[b][1] = obrat2
+            najboljsi_seznam_stevila_sosedov = trenutni_seznam_stevila_sosedov
+            mesto = A.index(a) #klele ju zamenjamo v vektorju A in B
+            mesto2 = B.index(b)
+            vmesni= A[mesto]
+            A[mesto] = B[mesto2]
+            B[mesto2] = vmesni
+        k += 1
+        t -=1
+    return A,B
 
-        #izracunamo kvaliteto X in Y- torej število povezav med X in Y
-
-
-def kvaliteta(I,C,D): #izracuna stevilo povezav med mnozicama C,D v grafu
-    d=len(C)
-    stevilo=0
+def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
+    n = len(G)
+    seznam_stevila_sosedov = [[0, 0]] * n #prva stevilka pove stevilo s kolikimi je povezan v svoji mnozici, druga s kolikimi je izven torej v Y
+    stevilo_povezav = 0
     for i in C:
+        Ix = 0
+        Ox = 0
+        for k in C:
+            if G[i][k] == 1:
+                Ix += 1
         for j in D:
-            if I[i][j]==1:
-                stevilo +=1
-    return stevilo
-
+            if G[j][k] == 1:
+                Ox += 1
+        nahajanje = C.index(i)
+        seznam_stevila_sosedov[nahajanje] = [Ix, Ox]
+        stevilo_povezav += Ox
+    for j in D:
+        Iy = 0
+        Oy = 0
+        for l in C:
+            if G[j][l] == 1:
+                Oy += 1
+        for k in D:
+            if G[j][k] == 1:
+                Iy += 1
+        nahajanje2 = D.index(j)
+        seznam_stevila_sosedov[nahajanje2 + len(C)] = [Iy, Oy]
+    return seznam_stevila_sosedov, stevilo_povezav
