@@ -81,3 +81,17 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
                 Iy += 1
         seznam_stevila_sosedov[nahajanje2 + len(C)] = [Iy, Oy]
     return seznam_stevila_sosedov, stevilo_povezav
+
+#primeri simuliranega ohlajanja in delovanje pri različnih temperaturah
+# MATRIKE
+J=[[0,0,0,1,1,1,1,0,0,1,0],[0,0,0,1,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,0,0,0,0],[1,1,1,0,0,0,0,0,1,0,0],[1,0,0,0,0,0,0,1,0,0,0],[1,0,1,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,1,1],[1,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,1,0,0]]
+G= [[0, 1, 0, 1, 1, 1], [1, 0, 1, 1, 1, 1], [0, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1], [1, 1, 1, 0, 1, 0]]
+
+#generiranje naključnih matrik poljubnih velikosti:
+import numpy as np
+
+def nakljucna_matrika(velikost):
+    A = np.random.randint(2, size=(velikost,velikost))
+    return np.array(A).tolist()
+
+
