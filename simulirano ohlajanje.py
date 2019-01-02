@@ -11,19 +11,19 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     Y = list(range(d1, n))
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
-    k=2
+    k = 3
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
-    while (t>0) or (k>5000) or (trenutno_stevilo_povezav == 0):
+    while (t > 0) or (k > 5000):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
         mesto = random.randrange(len(A))
         a = A[mesto]
         mesto2 = random.randrange(len(B))
-        b=B[mesto2]
+        b = B[mesto2]
         trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
-        if trenutno_stevilo_povezav < najboljse_stevilo_povezav or random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/(t)):
+        if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t )):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
             for i in A:
@@ -42,8 +42,8 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
                     trenutni_seznam_stevila_sosedov[j][1] -= 1
             #zamenja se se pri vozliščih ki sta se zamnjali notranje povezave postanejo zunanje in obratno
             obrat = trenutni_seznam_stevila_sosedov[a][0]
-            trenutni_seznam_stevila_sosedov[a][0]=trenutni_seznam_stevila_sosedov[a][1]
-            trenutni_seznam_stevila_sosedov[a][1]=obrat
+            trenutni_seznam_stevila_sosedov[a][0] = trenutni_seznam_stevila_sosedov[a][1]
+            trenutni_seznam_stevila_sosedov[a][1] = obrat
             obrat2 = trenutni_seznam_stevila_sosedov[b][0]
             trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
             trenutni_seznam_stevila_sosedov[b][1] = obrat2
@@ -52,8 +52,8 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
-        t -=1
-    return A,B,trenutno_stevilo_povezav
+        t -= 1
+    return A, B, trenutno_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
     n = len(G)
@@ -62,11 +62,11 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
     for nahajanje, i in enumerate(C, 0):
         Ix = 0
         Ox = 0
-        for k in C:
-            if G[i][k] == 1:
+        for m in C:
+            if G[i][m] == 1:
                 Ix += 1
         for j in D:
-            if G[j][k] == 1:
+            if G[j][m] == 1:
                 Ox += 1
         seznam_stevila_sosedov[nahajanje] = [Ix, Ox]
         stevilo_povezav += Ox
@@ -76,8 +76,8 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
         for l in C:
             if G[j][l] == 1:
                 Oy += 1
-        for k in D:
-            if G[j][k] == 1:
+        for o in D:
+            if G[j][o] == 1:
                 Iy += 1
         seznam_stevila_sosedov[nahajanje2 + len(C)] = [Iy, Oy]
     return seznam_stevila_sosedov, stevilo_povezav
@@ -95,7 +95,7 @@ D = [[0,2,1,0,2,1],[2,0,0,1,1,0],[1,0,0,2,0,1],[0,1,2,0,1,0],[2,1,0,1,0,1],[1,0,
 D1 = [[0,0,2,1,1,2],[0,0,1,0,1,1],[2,1,0,1,1,1],[1,0,1,0,0,2],[1,1,1,0,0,0],[2,1,1,2,0,0]]
 E = [[0,2,1,0,1,1,1],[2,0,1,1,1,0,1],[1,1,0,2,1,1,0],[0,1,2,0,1,1,1],[1,1,1,1,0,2,0],[1,0,1,1,2,0,2],[1,1,0,1,0,2,0]]
 E1 = [[0,1,2,1,1,2,0],[1,0,0,1,1,1,0],[2,0,0,1,1,1,1],[1,1,1,0,1,1,2],[1,1,1,1,0,1,2],[2,1,1,1,1,0,0],[0,0,1,2,2,0,0]]
-J,A,B,B1,C,C1: redki grafi; G,D,D1,E,E1: gosti grafi
+# J,A,B,B1,C,C1: redki grafi; G,D,D1,E,E1: gosti grafi
 #generiranje naključnih matrik poljubnih velikosti:
 import numpy as np
 
