@@ -11,7 +11,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     Y = list(range(d1, n))
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
-    k = 3
+    k = 1
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
     while (t > 0) or (k > 5000):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
@@ -23,7 +23,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
-        if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t )):
+        if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
             for i in A:
