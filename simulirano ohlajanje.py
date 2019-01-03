@@ -24,7 +24,7 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
-        print(trenutno_stevilo_povezav,trenutni_seznam_stevila_sosedov,a,b)
+        print(trenutno_stevilo_povezav, trenutni_seznam_stevila_sosedov, a, b)
         Q = najboljse_stevilo_povezav-trenutno_stevilo_povezav #naša kvaliteta
         if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp(Q/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
