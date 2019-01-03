@@ -12,16 +12,9 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
     k = 1
-<<<<<<< HEAD
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
-    while (t>0) and (k<100000):
-        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #prvi korak
-=======
-    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y)
-    #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
     while (t>0):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav)
->>>>>>> refs/remotes/origin/master
         mesto = random.randrange(len(A))
         a = A[mesto]
         mesto2 = random.randrange(len(B))
@@ -137,3 +130,4 @@ def pobarvaj_graf(A,X,Y):
             color_map.append('green')
     nx.draw(G,node_color = color_map,with_labels = True)
     plt.show()
+
