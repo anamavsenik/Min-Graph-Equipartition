@@ -13,7 +13,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     B = list(range(d1, n))
     k = 1
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
-    while (k < 10000):
+    while (t>0):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
         mesto = random.randrange(len(A))
         a = A[mesto]
@@ -23,6 +23,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
+        print(trenutno_stevilo_povezav,trenutni_seznam_stevila_sosedov,a,b)
         if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
@@ -52,7 +53,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
-        #t -= 1
+        t -= 0.1
     return A, B, trenutno_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
@@ -99,8 +100,23 @@ E1 = [[0,1,2,1,1,2,0],[1,0,0,1,1,1,0],[2,0,0,1,1,1,1],[1,1,1,0,1,1,2],[1,1,1,1,0
 #generiranje naključnih matrik poljubnih velikosti:
 import numpy as np
 
-def nakljucna_matrika(velikost):
+def nakljucna_matrika(velikost): #trapasta funkcija ki ne vrne simetričnih matrik
     A = np.random.randint(2, size=(velikost,velikost))
-    return np.array(A).tolist()
+    m= np.tril(A) + np.tril(A,-1).T
+    return np.array(m).tolist()
 
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy
 
+def pobarvaj_graf(A,X,Y):  #iz matrike A nariše graf v dveh barvah
+    M=numpy.matrix(A)
+    G=nx.from_numpy_matrix(M)
+    color_map = []
+    for node in G:
+        if node in X:
+            color_map.append('blue')
+        else:
+            color_map.append('green')
+    nx.draw(G,node_color = color_map,with_labels = True)
+    plt.show()
