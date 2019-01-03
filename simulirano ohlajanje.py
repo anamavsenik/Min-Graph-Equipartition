@@ -13,7 +13,7 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
     B = list(range(d1, n))
     k = 1
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
-    while (t>0):
+    while (t>0) and (k<10000):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav)
         mesto = random.randrange(len(A))
         a = A[mesto]
