@@ -1,9 +1,9 @@
 import random
 import math
 
-def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
+def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vrednost
     n = len(G)
-    for a in range(0, n): #spremenimo diagonalo da ima same 0
+    for a in range(0, n): #spremenimo diagonalo, da ima same 0
         if G[a][a] == 1:
             G[a][a] = 0
     d1 = int(n / 2)
@@ -12,21 +12,21 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
     k = 1
-    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
+    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
     while (t>0):
-        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
+        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #prvi korak
         mesto = random.randrange(len(A))
         a = A[mesto]
         mesto2 = random.randrange(len(B))
         b = B[mesto2]
-        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #pri indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi s kolikimi v drugi mn.
+        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #prvi indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi  pa s kolikimi v drugi množici
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
         print(trenutno_stevilo_povezav,trenutni_seznam_stevila_sosedov,a,b)
         if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
-            # sedaj poglejmo kako se bodo spremenili sosedi (bodi pozoren kateri so z njim povezani)
+            #pogledamo, kako se spremenijo sosedi
             for i in A:
                 if G[i][a] == 1:
                     trenutni_seznam_stevila_sosedov[i][0] -= 1
@@ -41,7 +41,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
                 if G[j][a] ==1:
                     trenutni_seznam_stevila_sosedov[j][0] += 1
                     trenutni_seznam_stevila_sosedov[j][1] -= 1
-            #zamenja se se pri vozliščih ki sta se zamnjali notranje povezave postanejo zunanje in obratno
+            #pri vozliščih, ki sta se zamnjali, notranje povezave postanejo zunanje in obratno
             obrat = trenutni_seznam_stevila_sosedov[a][0]
             trenutni_seznam_stevila_sosedov[a][0] = trenutni_seznam_stevila_sosedov[a][1]
             trenutni_seznam_stevila_sosedov[a][1] = obrat
@@ -49,16 +49,16 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
             trenutni_seznam_stevila_sosedov[b][0] = trenutni_seznam_stevila_sosedov[b][1]
             trenutni_seznam_stevila_sosedov[b][1] = obrat2
             najboljsi_seznam_stevila_sosedov = trenutni_seznam_stevila_sosedov
-            vmesni= A[mesto] #klele ju zamenjamo v vektorju A in B
+            vmesni= A[mesto] #zamenjamo ju še v vektorju A in B
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
         t -= 0.1
     return A, B, trenutno_stevilo_povezav
 
-def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
+def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med mnozicama vozlisc
     n = len(G)
-    seznam_stevila_sosedov = [[0, 0]] * n #prva stevilka pove stevilo s kolikimi je povezan v svoji mnozici, druga s kolikimi je izven torej v Y
+    seznam_stevila_sosedov = [[0, 0]] * n #prva stevilka pove stevilo, s kolikimi je povezan v svoji mnozici, druga pa s kolikimi je povezan v drugi množici
     stevilo_povezav = 0
     for nahajanje, i in enumerate(C, 0):
         Ix = 0
@@ -83,33 +83,35 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
         seznam_stevila_sosedov[nahajanje2 + len(C)] = [Iy, Oy]
     return seznam_stevila_sosedov, stevilo_povezav
 
-#primeri simuliranega ohlajanja in delovanje pri različnih temperaturah
-# MATRIKE
+# PRIMERI MATRIK
 J=[[0,0,0,1,1,1,1,0,0,1,0],[0,0,0,1,0,0,0,0,0,0,0],[0,0,0,1,0,1,0,0,0,0,0],[1,1,1,0,0,0,0,0,1,0,0],[1,0,0,0,0,0,0,1,0,0,0],[1,0,1,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0,0],[0,0,0,1,0,0,0,0,0,1,1],[1,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,0,1,0,0]]
-G= [[0, 1, 0, 1, 1, 1], [1, 0, 1, 1, 1, 1], [0, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1], [1, 1, 1, 0, 1, 0]]
+G= [[0,1,0,1,1,1], [1,0,1,1,1,1], [0,1,0,1,1,1], [1,1,1,0,1,0], [1,1,1,1,0,1], [1,1,1,0,1,0]]
 A = [[0,1,0,0,0,1],[1,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,1,1],[0,0,0,1,0,0],[1,0,0,1,0,0]]
 B = [[0,1,0,0,0,0,1],[1,0,0,0,1,0,1],[0,0,0,0,1,0,1],[0,0,0,0,1,1,0],[0,1,1,1,0,1,0],[0,0,0,1,1,0,0],[1,1,1,0,0,0,0]]
 B1 = [[0,0,1,1,1,0,0],[0,0,0,0,0,1,0],[1,0,0,1,0,1,0],[1,0,1,0,0,0,1],[1,0,0,0,0,0,1],[0,1,1,0,0,0,1],[0,0,0,1,1,1,0]]
 C = [[0,1,0,0,1,0],[1,0,1,0,1,0],[0,1,0,1,0,0],[0,0,1,0,1,1],[1,1,0,1,0,0],[0,0,0,1,0,0]]
 C1 = [[0,0,1,1,0,0],[0,0,0,1,0,1],[1,0,0,0,1,0],[1,1,0,0,0,1],[0,0,1,0,0,1],[0,1,0,1,1,0]]
-D = [[0,2,1,0,2,1],[2,0,0,1,1,0],[1,0,0,2,0,1],[0,1,2,0,1,0],[2,1,0,1,0,1],[1,0,1,0,1,0]]
-D1 = [[0,0,2,1,1,2],[0,0,1,0,1,1],[2,1,0,1,1,1],[1,0,1,0,0,2],[1,1,1,0,0,0],[2,1,1,2,0,0]]
-E = [[0,2,1,0,1,1,1],[2,0,1,1,1,0,1],[1,1,0,2,1,1,0],[0,1,2,0,1,1,1],[1,1,1,1,0,2,0],[1,0,1,1,2,0,2],[1,1,0,1,0,2,0]]
-E1 = [[0,1,2,1,1,2,0],[1,0,0,1,1,1,0],[2,0,0,1,1,1,1],[1,1,1,0,1,1,2],[1,1,1,1,0,1,2],[2,1,1,1,1,0,0],[0,0,1,2,2,0,0]]
+D = [[0,1,1,0,1,1],[1,0,0,1,1,0],[1,0,0,1,0,1],[0,1,1,0,1,0],[1,1,0,1,0,1],[1,0,1,0,1,0]]
+D1 = [[0,0,1,1,1,1],[0,0,1,0,1,1],[1,1,0,1,1,1],[1,0,1,0,0,1],[1,1,1,0,0,0],[1,1,1,1,0,0]]
+E = [[0,1,1,0,1,1,1],[1,0,1,1,1,0,1],[1,1,0,1,1,1,0],[0,1,1,0,1,1,1],[1,1,1,1,0,1,0],[1,0,1,1,1,0,1],[1,1,0,1,0,1,0]]
+E1 = [[0,1,1,1,1,1,0],[1,0,0,1,1,1,0],[1,0,0,1,1,1,1],[1,1,1,0,1,1,1],[1,1,1,1,0,1,1],[1,1,1,1,1,0,0],[0,0,1,1,1,0,0]]
 # J,A,B,B1,C,C1: redki grafi; G,D,D1,E,E1: gosti grafi
+
 #generiranje naključnih matrik poljubnih velikosti:
+
 import numpy as np
 
-def nakljucna_matrika(velikost): #trapasta funkcija ki ne vrne simetričnih matrik
+def nakljucna_matrika(velikost): #funkcija ki vrne simetrične matrike
     A = np.random.randint(2, size=(velikost,velikost))
     m= np.tril(A) + np.tril(A,-1).T
     return np.array(m).tolist()
 
+#funkcija, ki iz matrike A nariše graf v dveh barvah
+
 import networkx as nx
 import matplotlib.pyplot as plt
-import numpy
 
-def pobarvaj_graf(A,X,Y):  #iz matrike A nariše graf v dveh barvah
+def pobarvaj_graf(A,X,Y):
     M=numpy.matrix(A)
     G=nx.from_numpy_matrix(M)
     color_map = []
