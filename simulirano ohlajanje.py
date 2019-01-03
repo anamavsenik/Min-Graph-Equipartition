@@ -13,7 +13,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
     B = list(range(d1, n))
     k = 1
     (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najbolsi glede na se prejsnje
-    while (t > 0) or (k > 5000):
+    while (k < 10000):
         (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #za prvi korak je okej tko
         mesto = random.randrange(len(A))
         a = A[mesto]
@@ -52,7 +52,7 @@ def simulirano_ohlajanje(G,t): #temperaturo ponavadi izberemo visoko
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
-        t -= 1
+        #t -= 1
     return A, B, trenutno_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med razdelitvama grafa
