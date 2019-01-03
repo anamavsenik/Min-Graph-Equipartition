@@ -12,19 +12,22 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
     A = list(range(0, d1)) #vektorja indeksov vozlišč
     B = list(range(d1, n))
     k = 1
-    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y) #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
+    (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) = seznam_stevila_sosedov(G,X,Y)
+    #tisti, ki je pri prejsnjem koraku najboljsi glede na vse prejsnje
     while (t>0):
-        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav) #prvi korak
+        (trenutni_seznam_stevila_sosedov, trenutno_stevilo_povezav) = (najboljsi_seznam_stevila_sosedov, najboljse_stevilo_povezav)
         mesto = random.randrange(len(A))
         a = A[mesto]
         mesto2 = random.randrange(len(B))
         b = B[mesto2]
-        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0] #prvi indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi  pa s kolikimi v drugi množici
+        #prvi indeks ti vedno pove s kolikimi je povezan v svoji množici, drugi  pa s kolikimi v drugi množici
+        trenutno_stevilo_povezav += trenutni_seznam_stevila_sosedov[a][0] + trenutni_seznam_stevila_sosedov[b][0]
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
         print(trenutno_stevilo_povezav,trenutni_seznam_stevila_sosedov,a,b)
-        if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp((najboljse_stevilo_povezav-trenutno_stevilo_povezav)/t)):
+        Q = najboljse_stevilo_povezav-trenutno_stevilo_povezav #naša kvaliteta
+        if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp(Q/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
             #pogledamo, kako se spremenijo sosedi
             for i in A:
@@ -58,7 +61,8 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med mnozicama vozlisc
     n = len(G)
-    seznam_stevila_sosedov = [[0, 0]] * n #prva stevilka pove stevilo, s kolikimi je povezan v svoji mnozici, druga pa s kolikimi je povezan v drugi množici
+    #prva stevilka pove stevilo, s kolikimi je povezan v svoji mnozici, druga pa s kolikimi je povezan v drugi množici:
+    seznam_stevila_sosedov = [[0, 0]] * n
     stevilo_povezav = 0
     for nahajanje, i in enumerate(C, 0):
         Ix = 0
