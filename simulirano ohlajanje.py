@@ -67,7 +67,7 @@ def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako
             if G[i][m] == 1:
                 Ix += 1
         for j in D:
-            if G[j][m] == 1:
+            if G[i][j] == 1:
                 Ox += 1
         seznam_stevila_sosedov[nahajanje] = [Ix, Ox]
         stevilo_povezav += Ox
