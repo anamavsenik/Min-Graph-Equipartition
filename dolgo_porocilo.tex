@@ -177,10 +177,11 @@ Na prvi sliki na naslednji strani je prikazana pomožna funkcija,ki vrne seznam 
   \caption{Psevdokoda simuliranega ohlajanja in naključnih matrik}
 \end{figure}
 
+
 \begin{figure}
   \centering
   \includegraphics{primer_grafa}
- \caption{Primer grafa z optimalno delitvijo}
+ \caption{\textbf{Primer} grafa z optimalno delitvijo}
 \end{figure}
 
 \begin{figure}
@@ -189,6 +190,7 @@ Na prvi sliki na naslednji strani je prikazana pomožna funkcija,ki vrne seznam 
  \caption{Uporaba metod na grafu iz slike 4}
 \end{figure}
 \FloatBarrier
+
 \section{\textbf{SKLEP IN ZAKLJUČEK}}
 
 Na koncu smo napisana algoritma preizkusili na konkretnih podatkih in preverjali nekaj predpostavk, ki smo jih zasledili med viri. Požrešna metoda bi naj bila manj zanesljiva od metode simuliranega ohlajanja, saj na vsakem koraku izbere optimalno rešitev, pri čemer se ne ozira na posledice. Ta metoda nekako predpostavlja, da je pot po lokalnih optimumih tudi pot do globalnega optimuma, kar pa ni vedno res, zaradi česar pogosto ne vrne optimalnega rezultata. Na drugi strani pa metoda simuliranega ohlajanja na začetku lahko pogosteje vrača v tistem trenutku slabše rezultate, vendar to počne ravno zaradi tega, da se izogne lokalnim optimumom, ki nas ne bi pripeljali do globalnega. Ko se temperatura niža, pa se niža tudi verjetnost izbiranja slabših rešitev, kar nas potem skoraj zagotovo pripelje vsaj v okolico globalnega optimuma, če že ne do njega. \\
