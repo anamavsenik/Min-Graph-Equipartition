@@ -24,7 +24,7 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
         trenutno_stevilo_povezav -= trenutni_seznam_stevila_sosedov[a][1] + trenutni_seznam_stevila_sosedov[b][1]
         if G[a][b] == 1:
             trenutno_stevilo_povezav += 2
-        print(trenutno_stevilo_povezav, trenutni_seznam_stevila_sosedov, a, b)
+        print(A,B,trenutno_stevilo_povezav, trenutni_seznam_stevila_sosedov)
         Q = najboljse_stevilo_povezav-trenutno_stevilo_povezav #naša kvaliteta
         if (trenutno_stevilo_povezav < najboljse_stevilo_povezav) or (random.uniform(0, 1) < math.exp(Q/t)):
             najboljse_stevilo_povezav = trenutno_stevilo_povezav
@@ -55,7 +55,7 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
             A[mesto] = B[mesto2]
             B[mesto2] = vmesni
         k += 1
-        t -= 0.1
+        t -= 1
     return A, B, trenutno_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med mnozicama vozlisc
@@ -118,6 +118,7 @@ def nakljucna_matrika(velikost): #funkcija ki vrne simetrične matrike
 
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy
 
 def pobarvaj_graf(A,X,Y):
     M=numpy.matrix(A)
