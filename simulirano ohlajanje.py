@@ -56,7 +56,7 @@ def simulirano_ohlajanje(G,t): #temperaturo običajno nastavimo na visoko vredno
             B[mesto2] = vmesni
         k += 1
         t -= 1
-    return A, B, trenutno_stevilo_povezav
+    return A, B, najboljse_stevilo_povezav
 
 def seznam_stevila_sosedov(G,C,D):    #izracuna zacetno stevilo sosedov za vsako vozlisce in stevilo povezav med mnozicama vozlisc
     n = len(G)
